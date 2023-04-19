@@ -7,7 +7,7 @@
         public Golfer(String name, string ziel) {
             this.name = name;
             this.ziel = ziel;
-         }
+        }
         public void SetName(String name) {
             this.name = name;
         }

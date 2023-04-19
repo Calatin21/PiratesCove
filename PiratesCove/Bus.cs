@@ -1,27 +1,19 @@
 ﻿namespace PiratesCove {
     internal class Bus {
-        int nummer;
         bool tuerkaputt;
         Queue<Golfer> passagiere = new Queue<Golfer>();
         Random random = new Random();
-        public Bus(int nummer) {
-            this.nummer = nummer;
-        }
         public void Einsteigen(BusStation station) {
             foreach (Golfer item in station.GetGolfers()) {
                 if (passagiere.Count() >= 30) {
-                    Console.WriteLine("Sorry, der bus ist voll.");
+                    Console.WriteLine($"Sorry Passagier {item.GetName()}, der bus ist voll.");
                 }
                 else {
                     Console.WriteLine($"Passagier: {item.GetName()} mit Ziel: {item.GetZiel()} ist zugestiegen.");
                     item.SetAufenthaltsort("Bus");
                     passagiere.Enqueue(item);
-
                 }
             }
-        }
-        public List<Golfer> GetGolfers() {
-            return passagiere.ToList();
         }
         public void Austeigen(BusStation station, FBI fbi, BusStation rueck) {
             tuerkaputt = Convert.ToBoolean(random.Next(0, 2));

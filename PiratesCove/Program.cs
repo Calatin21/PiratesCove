@@ -25,8 +25,8 @@
         }
         static void Main(string[] args) {
             FBI fBI = new FBI();
-            Bus bus1 = new Bus(1);
-            Bus bus2 = new Bus(2);
+            Bus bus1 = new Bus();
+            Bus bus2 = new Bus();
             BusStation station1 = new BusStation("Great Yarmouth");
             BusStation station1r = new BusStation("Great Yarmouth");
             BusStation station2 = new BusStation("Greenhithe");
@@ -48,36 +48,32 @@
             Random random = new Random();
             int x = 1;
             String ziel;
-            for (int i = 0; i <= random.Next(30, 31); i++) {
+            for (int i = 0; i <= random.Next(10, 50); i++) {
                 ziel = Zielsuche(2);
                 station1.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
                 x++;
             }
-            for (int i = 0; i <= random.Next(30, 31); i++) {
+            for (int i = 0; i <= random.Next(10, 50); i++) {
                 ziel = Zielsuche(3);
                 station2.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
                 x++;
             }
-            for (int i = 0; i <= random.Next(30, 31); i++) {
+            for (int i = 0; i <= random.Next(10, 50); i++) {
                 ziel = Zielsuche(4);
                 station3.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
                 x++;
             }
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Hinfahrt:");
-            Console.ForegroundColor = ConsoleColor.Gray;
             bus1.Tour(route, fBI, routeR);
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Verdächtige:");
-            Console.ForegroundColor = ConsoleColor.Gray;
             fBI.PrintAll();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Rückfahrt:");
-            Console.ForegroundColor = ConsoleColor.Gray;
             bus2.Tour(routeR, fBI, route);
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("Verdächtige:");
-            Console.ForegroundColor = ConsoleColor.Gray;
             fBI.PrintAll();
         }
     }

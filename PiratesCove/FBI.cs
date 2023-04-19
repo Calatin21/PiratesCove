@@ -28,6 +28,7 @@
             foreach (Golfer item in daten) {
                 Console.WriteLine($"Name: {item.GetName()} Aufenthaltsort: {item.GetAufenthaltsort()}");
             }
+            Console.WriteLine("");
         }
         public Golfer GetGolfer(String name) {
             Golfer ergebnis = null;
