@@ -1,9 +1,9 @@
 ﻿namespace PiratesCove {
     internal class Program {
-        static String Zielsuche() {
+        static String Zielsuche(int zahl) {
             String ziel = "kein Ziel";
             Random random = new Random();
-            int x = random.Next(1, 5);
+            int x = random.Next(zahl, 5);
             switch (x) {
                 case 1:
                 ziel = "Great Yarmouth";
@@ -48,28 +48,37 @@
             Random random = new Random();
             int x = 1;
             String ziel;
-            for (int i = 0; i <= random.Next(0, 11); i++) {
-                ziel = Zielsuche();
+            for (int i = 0; i <= random.Next(5, 11); i++) {
+                ziel = Zielsuche(2);
                 station1.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
                 x++;
             }
-            for (int i = 0; i <= random.Next(0, 11); i++) {
-                ziel = Zielsuche();
+            for (int i = 0; i <= random.Next(5, 11); i++) {
+                ziel = Zielsuche(3);
                 station2.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
                 x++;
             }
-            for (int i = 0; i <= random.Next(0, 11); i++) {
-                ziel = Zielsuche();
+            for (int i = 0; i <= random.Next(5, 11); i++) {
+                ziel = Zielsuche(4);
                 station3.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
                 x++;
             }
-            for (int i = 0; i <= random.Next(0, 11); i++) {
-                ziel = Zielsuche();
-                station4.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
-                x++;
-            }
+            //for (int i = 0; i <= random.Next(0, 11); i++) {
+            //    ziel = Zielsuche(4);
+            //    station4.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
+            //    x++;
+            //}
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("Hinfahrt:");
+            Console.ForegroundColor= ConsoleColor.Gray;
             bus1.Tour(route, fBI, routeR);
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Rückfahrt:");
+            Console.ForegroundColor = ConsoleColor.Gray;
             bus2.Tour(routeR, fBI, route);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("Verdächtige:");
+            Console.ForegroundColor = ConsoleColor.Gray;
             fBI.PrintAll();
         }
     }

@@ -2,7 +2,20 @@
     internal class FBI {
         List<Golfer> daten = new List<Golfer>();
         public void AddSuspect(Golfer golfer) {
-            daten.Add(golfer);
+            bool gefunden= false;
+            if (daten.Count > 0) {
+                foreach (Golfer item in daten) {
+                    if (item.GetName() == golfer.GetName()) {
+                        gefunden = true; 
+                    }
+                }
+            }
+            else {
+                daten.Add(golfer);
+            }
+            if (!gefunden) {
+                daten.Add(golfer);
+            }
         }
         public void PrintWanted(String name) {
             foreach (Golfer item in daten) {

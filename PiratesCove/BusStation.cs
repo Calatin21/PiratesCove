@@ -26,6 +26,8 @@
         }
         public void InsertGolfer(List<Golfer> golfer) {
             List<Golfer> liste = new List<Golfer>();
+            foreach (Golfer item in golfers) {
+                Console.WriteLine($"Passagier: {item.GetName()} mit Ziel: {item.GetZiel()} ist zugestiegen."); }
             liste.AddRange(golfer);
             liste.AddRange(golfers);
             golfers = liste;
