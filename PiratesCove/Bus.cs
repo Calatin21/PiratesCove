@@ -44,9 +44,10 @@
             station.InsertGolfer(liste);
         }
         public void PrintGolfer() {
-            foreach (Golfer item in schlange) {
+            foreach (Golfer item in schlange.Reverse()) {
                 Console.WriteLine($"Passagier: {item.GetName()} Ziel: {item.GetZiel()}");
             }
+            Console.WriteLine("");
         }
         public void Tour(List<BusStation> route, FBI fbi, List<BusStation> rueck) {
             foreach (BusStation item in route) {
