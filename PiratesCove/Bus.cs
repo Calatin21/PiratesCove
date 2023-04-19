@@ -2,37 +2,38 @@
     internal class Bus {
         int nummer;
         bool tuerkaputt;
-        Queue<Golfer> schlange = new Queue<Golfer>();
+        Queue<Golfer> passagiere = new Queue<Golfer>();
         Random random = new Random();
         public Bus(int nummer) {
             this.nummer = nummer;
         }
         public void Einsteigen(BusStation station) {
             foreach (Golfer item in station.GetGolfers()) {
-                if (schlange.Count() >= 30) {
+                if (passagiere.Count() >= 30) {
                     Console.WriteLine("Sorry, der bus ist voll.");
                 }
                 else {
+                    Console.WriteLine($"Passagier: {item.GetName()} mit Ziel: {item.GetZiel()} ist zugestiegen.");
                     item.SetAufenthaltsort("Bus");
-                    schlange.Enqueue(item);
+                    passagiere.Enqueue(item);
 
                 }
             }
         }
         public List<Golfer> GetGolfers() {
-            return schlange.ToList();
+            return passagiere.ToList();
         }
         public void Austeigen(BusStation station, FBI fbi, BusStation rueck) {
             tuerkaputt = Convert.ToBoolean(random.Next(0, 2));
-            List<Golfer> liste = new List<Golfer>();
+            Queue<Golfer> schlange = new Queue<Golfer>();
             if (tuerkaputt) {
                 Console.WriteLine("Die Tür ist mal wieder kaputt.");
-                schlange = new Queue<Golfer>(schlange.Reverse());
+                passagiere = new Queue<Golfer>(passagiere.Reverse());
             }
-            while (schlange.Count > 0) {
-                Golfer golfer = schlange.Dequeue();
+            while (passagiere.Count > 0) {
+                Golfer golfer = passagiere.Dequeue();
                 if (golfer.GetZiel() != station.GetName()) {
-                    liste.Add(golfer);
+                    schlange.Enqueue(golfer);
                 }
                 else {
                     fbi.GetGolfer(golfer.GetName()).SetAufenthaltsort(station.GetName());
@@ -41,10 +42,10 @@
                     rueck.AddGolfer(golfer, fbi);
                 }
             }
-            station.InsertGolfer(liste);
+            passagiere = schlange;
         }
         public void PrintGolfer() {
-            foreach (Golfer item in schlange.Reverse()) {
+            foreach (Golfer item in passagiere.Reverse()) {
                 Console.WriteLine($"Passagier: {item.GetName()} Ziel: {item.GetZiel()}");
             }
             Console.WriteLine("");
@@ -57,11 +58,11 @@
                         gegen = station;
                     }
                 }
-                    this.Austeigen(item, fbi, gegen);
-                    this.Einsteigen(item);
-                    Console.WriteLine($"Nach der Station {item.GetName()} sind folgende {schlange.Count()} Passagiere im Bus.");
-                    this.PrintGolfer();
-                
+                this.Austeigen(item, fbi, gegen);
+                this.Einsteigen(item);
+                Console.WriteLine($"Nach der Station {item.GetName()} sind folgende {passagiere.Count()} Passagiere im Bus.");
+                this.PrintGolfer();
+
             }
         }
     }
