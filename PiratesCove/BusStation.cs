@@ -16,22 +16,25 @@
             this.bus = bus;
         }
         public void Ausfahren() {
-           this.bus = null;
+            this.bus = null;
         }
-        public void AddGolfer(Golfer golfer) {
+        public void AddGolfer(Golfer golfer, FBI fbi) {
+            golfer.SetStart(this.name);
+            golfer.SetAufenthaltsort(this.name);
+            fbi.AddSuspect(golfer);
             golfers.Add(golfer);
         }
-        public void InsertGolfer (Golfer golfer) {
-            golfers.Insert(0, golfer);
+        public void InsertGolfer(List<Golfer> golfer) {
+            List<Golfer> liste = new List<Golfer>();
+            liste.AddRange(golfer);
+            liste.AddRange(golfers);
+            golfers = liste;
         }
         public void RemoveGolfer(Golfer golfer) {
             golfers.Remove(golfer);
         }
         public List<Golfer> GetGolfers() {
             return golfers;
-        }
-        public Golfer GetGolfer() {
-            return golfers.First();
         }
     }
 }

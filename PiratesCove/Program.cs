@@ -1,70 +1,76 @@
 ﻿namespace PiratesCove {
     internal class Program {
+        static String Zielsuche() {
+            String ziel = "kein Ziel";
+            Random random = new Random();
+            int x = random.Next(1, 5);
+            switch (x) {
+                case 1:
+                ziel = "Great Yarmouth";
+                break;
+                case 2:
+                ziel = "Greenhithe";
+                break;
+                case 3:
+                ziel = "Shanklin";
+                break;
+                case 4:
+                ziel = "Wexford";
+                break;
+                default:
+                ziel = "kein Ziel";
+                break;
+            }
+            return ziel;
+        }
         static void Main(string[] args) {
-            Bus bus1 = new Bus(1, false);
+            FBI fBI = new FBI();
+            Bus bus1 = new Bus(1);
+            Bus bus2 = new Bus(2);
             BusStation station1 = new BusStation("Great Yarmouth");
+            BusStation station1r = new BusStation("Great Yarmouth");
             BusStation station2 = new BusStation("Greenhithe");
+            BusStation station2r = new BusStation("Greenhithe");
             BusStation station3 = new BusStation("Shanklin");
+            BusStation station3r = new BusStation("Shanklin");
             BusStation station4 = new BusStation("Wexford");
+            BusStation station4r = new BusStation("Wexford");
             List<BusStation> route = new List<BusStation>();
+            List<BusStation> routeR = new List<BusStation>();
             route.Add(station1);
             route.Add(station2);
             route.Add(station3);
             route.Add(station4);
-
-            for (int i = 0; i < 10; i++) {
-                station1.AddGolfer(new Golfer($"{i}", "egal"));
+            routeR.Add(station4r);
+            routeR.Add(station3r);
+            routeR.Add(station2r);
+            routeR.Add(station1r);
+            Random random = new Random();
+            int x = 1;
+            String ziel;
+            for (int i = 0; i <= random.Next(0, 11); i++) {
+                ziel = Zielsuche();
+                station1.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
+                x++;
             }
-            for (int i = 10; i < 20; i++) {
-                station1.AddGolfer(new Golfer($"{i}", "Greenhithe"));
+            for (int i = 0; i <= random.Next(0, 11); i++) {
+                ziel = Zielsuche();
+                station2.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
+                x++;
             }
-            for (int i = 20; i < 30; i++) {
-                station1.AddGolfer(new Golfer($"{i}", "egal"));
+            for (int i = 0; i <= random.Next(0, 11); i++) {
+                ziel = Zielsuche();
+                station3.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
+                x++;
             }
-            for (int i = 30; i < 45; i++) {
-                station2.AddGolfer(new Golfer($"{i}", "Shanklin"));
+            for (int i = 0; i <= random.Next(0, 11); i++) {
+                ziel = Zielsuche();
+                station4.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
+                x++;
             }
-            for (int i = 50; i < 65; i++) {
-                station3.AddGolfer(new Golfer($"{i}", "Wexford"));
-            }
-            for (int i = 80; i < 75; i++) {
-                station4.AddGolfer(new Golfer($"{i}", "Great Yarkmouth"));
-            }
-
-            bus1.Tour(route);
-            //Console.WriteLine("Ausgabe Bus leer:");
-            //bus1.PrintGolfer();
-            //Console.WriteLine("");
-
-            //station1.Einfahren(bus1);
-            //bus1.Austeigen(station1);
-            //bus1.Einsteigen(station1);
-            //Console.WriteLine("Ausgabe nach Station 1:");
-            //bus1.PrintGolfer();
-            //Console.WriteLine("");
-            //station1.Ausfahren();
-
-            //station2.Einfahren(bus1);
-            //bus1.Austeigen(station2);
-            //bus1.Einsteigen(station2);
-            //Console.WriteLine("Ausgabe nach Station 2:");
-            //bus1.PrintGolfer();
-            //Console.WriteLine("");
-
-            //station3.Einfahren(bus1);
-            //bus1.Austeigen(station3);
-            //bus1.Einsteigen(station3);
-            //Console.WriteLine("Ausgabe nach Station 3:");
-            //bus1.PrintGolfer();
-            //Console.WriteLine("");
-
-            //station4.Einfahren(bus1);
-            //bus1.Austeigen(station4);
-            //bus1.Einsteigen(station4);
-            //Console.WriteLine("Ausgabe nach Station 4:");
-            //bus1.PrintGolfer();
-            //Console.WriteLine("");
-
+            bus1.Tour(route, fBI, routeR);
+            bus2.Tour(routeR, fBI, route);
+            fBI.PrintAll();
         }
     }
 }
