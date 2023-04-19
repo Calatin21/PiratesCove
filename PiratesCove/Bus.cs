@@ -14,6 +14,11 @@
                     passagiere.Enqueue(item);
                 }
             }
+            for (int i = 0; i < station.GetGolfers().Count(); i++) {
+                if (passagiere.Contains(station.GetGolfers()[i])) {
+                    station.RemoveGolfer(station.GetGolfers()[i]);
+                }
+            }
         }
         public void Austeigen(BusStation station, FBI fbi, BusStation rueck) {
             tuerkaputt = Convert.ToBoolean(random.Next(0, 2));
@@ -50,8 +55,12 @@
                         gegen = station;
                     }
                 }
+                Console.WriteLine($"Bevor der Bus kommt warten diese Passagiere an Busstation: {item.GetName()}");
+                item.PrintGolfer();
                 this.Austeigen(item, fbi, gegen);
                 this.Einsteigen(item);
+                Console.WriteLine($"Nachdem der Bus abgefahren ist, warten diese Passagiere an Busstation: {item.GetName()}");
+                item.PrintGolfer();
                 Console.WriteLine($"Nach der Station {item.GetName()} sind folgende {passagiere.Count()} Passagiere im Bus.");
                 this.PrintGolfer();
 

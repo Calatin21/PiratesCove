@@ -1,7 +1,7 @@
 ﻿namespace PiratesCove {
     internal class BusStation {
         String name;
-        List<Golfer> golfers = new List<Golfer>();
+        List<Golfer> warteSchlange = new List<Golfer>();
         public BusStation(String name) {
             this.name = name;
         }
@@ -15,10 +15,18 @@
             golfer.SetStart(this.name);
             golfer.SetAufenthaltsort(this.name);
             fbi.AddSuspect(golfer);
-            golfers.Add(golfer);
+            warteSchlange.Add(golfer);
         }
         public List<Golfer> GetGolfers() {
-            return golfers;
+            return warteSchlange;
+        }
+        public void RemoveGolfer(Golfer golfer) {
+            warteSchlange.Remove(golfer);
+        }
+        public void PrintGolfer() {
+            foreach (Golfer item in warteSchlange) {
+                Console.WriteLine(item.GetName());
+            }
         }
     }
 }

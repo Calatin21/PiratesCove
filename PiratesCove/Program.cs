@@ -26,7 +26,6 @@
         static void Main(string[] args) {
             FBI fBI = new FBI();
             Bus bus1 = new Bus();
-            Bus bus2 = new Bus();
             BusStation station1 = new BusStation("Great Yarmouth");
             BusStation station1r = new BusStation("Great Yarmouth");
             BusStation station2 = new BusStation("Greenhithe");
@@ -63,18 +62,19 @@
                 station3.AddGolfer(new Golfer($"{x}", $"{ziel}"), fBI);
                 x++;
             }
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Hinfahrt:");
-            bus1.Tour(route, fBI, routeR);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Verdächtige:");
-            fBI.PrintAll();
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("Rückfahrt:");
-            bus2.Tour(routeR, fBI, route);
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("Verdächtige:");
-            fBI.PrintAll();
+            for (int i = 0; i < 5; i++) {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Hinfahrt:");
+                bus1.Tour(route, fBI, routeR);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Aufenthaltsort der Verdächtigen:");
+                fBI.PrintAll();
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("Rückfahrt:");
+                bus1.Tour(routeR, fBI, route);
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("Aufenthaltsort der Verdächtigen:");
+                fBI.PrintAll(); }
         }
     }
 }
