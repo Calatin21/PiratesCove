@@ -17,6 +17,9 @@
             fbi.AddSuspect(golfer);
             warteSchlange.Add(golfer);
         }
+        public void AddGolfers(List<Golfer> golfers) {
+            warteSchlange = golfers;
+        }
         public List<Golfer> GetGolfers() {
             return warteSchlange;
         }

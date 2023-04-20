@@ -4,6 +4,7 @@
         Queue<Golfer> passagiere = new Queue<Golfer>();
         Random random = new Random();
         public void Einsteigen(BusStation station) {
+            List<Golfer> liste = new List<Golfer>();
             foreach (Golfer item in station.GetGolfers()) {
                 if (passagiere.Count() >= 30) {
                     Console.WriteLine($"Sorry Passagier {item.GetName()}, der bus ist voll.");
@@ -12,13 +13,10 @@
                     Console.WriteLine($"Passagier: {item.GetName()} mit Ziel: {item.GetZiel()} ist zugestiegen.");
                     item.SetAufenthaltsort("Bus");
                     passagiere.Enqueue(item);
+                    liste.Add(item);
                 }
             }
-            for (int i = 0; i < station.GetGolfers().Count(); i++) {
-                if (passagiere.Contains(station.GetGolfers()[i])) {
-                    station.RemoveGolfer(station.GetGolfers()[i]);
-                }
-            }
+            station.AddGolfers(station.GetGolfers().Except(liste).ToList());
         }
         public void Austeigen(BusStation station, FBI fbi, BusStation rueck) {
             tuerkaputt = Convert.ToBoolean(random.Next(0, 2));
